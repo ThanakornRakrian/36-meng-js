@@ -8,6 +8,18 @@ document.getElementById("form").addEventListener("submit", function (e) {
   const imageURL = document.getElementById("imageURLInput").value;
   const productName = document.getElementById("productInput").value;
   const price = document.getElementById("priceInput").value;
+  const errorMessage = document.getElementById("errorMessage");
+
+  if (!isImgUrl(imageURL)) {
+    errorMessage.textContent = "Please enter a valid image URL.";
+    return;
+  }
+
+  if (productName.length < 3 || productName.length > 50) {
+    errorMessage.textContent =
+      "Please describe your image (at least 3 characters, and not over 255 characters).";
+    return;
+  }
 
   const newProduct = {
     id: ++idCounter,
@@ -44,12 +56,14 @@ document.getElementById("addtocart-btn").addEventListener("click", (e) => {
     return totalPrice;
   });
   console.log(totalPrice);
-//   document.getElementById("totalPrice").innerText = `You have to pay : ${totalPrice}`;
+  //   document.getElementById("totalPrice").innerText = `You have to pay : ${totalPrice}`;
 });
 
-document.getElementById("calculate-btn").addEventListener("click",() => {
-    document.getElementById("totalPrice").innerText = `You have to pay : ${totalPrice}`;
-})
+document.getElementById("calculate-btn").addEventListener("click", () => {
+  document.getElementById(
+    "totalPrice"
+  ).innerText = `You have to pay : ${totalPrice}`;
+});
 
 function displayProducts(product) {
   const displayProduct = document.getElementById("display-product");
@@ -91,9 +105,9 @@ function addToCart(product) {
   card.className =
     "relative cursor-pointer flex items-center justify-between bg-white shadow-md ring ring-transparent rounded-lg";
 
-  card.innerHTML = `<div id="${product.id}" class="overflow-hidden rounded-tl-lg rounded-bl-lg w-26">
+  card.innerHTML = `<div id="${product.id}" class="overflow-hidden rounded-tl-lg rounded-bl-lg w-24">
   <img
-      class="h-16 w-26 object-cover"
+      class="h-16 w-24 object-cover"
       src="${product.imageURL}"
     />
 </div>
@@ -109,6 +123,13 @@ function addToCart(product) {
   displayCart.appendChild(card);
 }
 
-function calculate(){
-    document.getElementById("totalPrice").innerText = `You have to pay : ${totalPrice}`;
+function calculate() {
+  document.getElementById(
+    "totalPrice"
+  ).innerText = `You have to pay : ${totalPrice}`;
+}
+
+function isImgUrl(imageURL) {
+  const input = new URL(imageURL);
+  return /\.(jpg|jpeg|png|gif)$/.test(input.pathname);
 }
