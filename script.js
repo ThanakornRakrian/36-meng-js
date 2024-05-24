@@ -6,7 +6,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
   e.preventDefault();
 
   const imageURL = document.getElementById("imageURLInput").value;
-  const productName = document.getElementById("priceInput").value;
+  const productName = document.getElementById("productInput").value;
   const price = document.getElementById("priceInput").value;
 
   const newProduct = {
@@ -26,15 +26,30 @@ document.getElementById("addtocart-btn").addEventListener("click", (e) => {
   const checkedProduct = document.querySelectorAll(
     '#display-product input[type="checkbox"]:checked'
   );
-  //ทำ ele ที่จะใส่ให้ว่างก่อน
-  document.getElementById("display-product").innerHTML="";
+
+  document.getElementById("display-cart").innerHTML = "";
+  totalPrice = 0;
+  //   console.log(checkedProduct);
   checkedProduct.forEach((checkedProduct) => {
     const productId = parseInt(checkedProduct.id);
     let product = products.find((product) => product.id === productId);
 
+    let checkedPrice = parseInt(product.price);
+    totalPrice += checkedPrice;
+    // console.log(checkedProduct.price);
+    // console.log(checkedPrice);
+    // console.log(product.productName);
+    // console.log(product);
     addToCart(product);
+    return totalPrice;
   });
+  console.log(totalPrice);
+//   document.getElementById("totalPrice").innerText = `You have to pay : ${totalPrice}`;
 });
+
+document.getElementById("calculate-btn").addEventListener("click",() => {
+    document.getElementById("totalPrice").innerText = `You have to pay : ${totalPrice}`;
+})
 
 function displayProducts(product) {
   const displayProduct = document.getElementById("display-product");
@@ -73,9 +88,10 @@ function displayProducts(product) {
 function addToCart(product) {
   const displayCart = document.getElementById("display-cart");
   const card = document.createElement("div");
-  card.className = "relative cursor-pointer flex items-center justify-between bg-white shadow-md ring ring-transparent rounded-lg";
-  
-  card.innerHTML = `<div id="${product.id}" class="overflow-hidden rounded-tl-lg rounded-bl-lg ">
+  card.className =
+    "relative cursor-pointer flex items-center justify-between bg-white shadow-md ring ring-transparent rounded-lg";
+
+  card.innerHTML = `<div id="${product.id}" class="overflow-hidden rounded-tl-lg rounded-bl-lg w-26">
   <img
       class="h-16 w-26 object-cover"
       src="${product.imageURL}"
@@ -87,36 +103,12 @@ function addToCart(product) {
     ${product.productName}
     </h3>
     <h4 class="text-sm text-gray-500 pr-4" >
-      ${product.price}
+      $ ${product.price}
     </h4>`;
-//   const card = document.createElement("label");
-//   card.className = "relative cursor-pointer";
-//   card.innerHTML = `<input
-//       type="checkbox"
-//       name="image"
-//       id="${product.id}"
-//       class="sr-only peer"
-//       "
-//     />
-//     <div
-//       class="overflow-hidden rounded-lg bg-white shadow-md ring ring-transparent peer-checked:ring-purple-400"
-//     >
-//       <div>
-//         <img
-//           class="h-28 w-48 object-cover"
-//           src="${product.imageURL}"
-//         />
-//       </div>
-//       <div class="p-2.5">
-//         <h3
-//           class="text-lg font-bold tracking-wide text-gray-700"
-//         >
-//           ${product.productName}
-//         </h3>
-//         <h4 class="text-sm text-gray-500" >
-//           $ ${product.price}
-//         </h4>
-//       </div>
-//     </div>`;
+
   displayCart.appendChild(card);
+}
+
+function calculate(){
+    document.getElementById("totalPrice").innerText = `You have to pay : ${totalPrice}`;
 }
