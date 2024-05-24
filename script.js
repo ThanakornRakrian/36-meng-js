@@ -60,6 +60,12 @@ document.getElementById("calculate-btn").addEventListener("click", () => {
   ).innerText = `You have to pay : ${totalPrice}`;
 });
 
+// document.getElementById("del-btn").addEventListener("click", () => {
+//   let removeProductId = parseInt(product.id);
+//   let productRemove = products.find((product) => product.id == removeProductId);
+//   romoveProduct(productRemove);
+// });
+
 function displayProducts(product) {
   const displayProduct = document.getElementById("display-product");
   const card = document.createElement("label");
@@ -116,7 +122,9 @@ function addToCart(product) {
     </h3>
     <h4 class="text-sm text-gray-500 pr-4" >
       $ ${product.price}
-    </h4>`;
+    </h4>
+    `;
+// <button id="del-btn" class="bg-red-400 px-4 py-1 rounded-lg m-2">Remove</button>
 
   displayCart.appendChild(card);
 }
@@ -131,3 +139,9 @@ function isImgUrl(imageURL) {
   const input = new URL(imageURL);
   return /\.(jpg|jpeg|png|gif)$/.test(input.pathname);
 }
+
+// function romoveProduct(product) {
+//   document
+//     .getElementById("display-cart")
+//     .removeChild(document.getElementById(product.id));
+// }
