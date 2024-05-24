@@ -39,7 +39,6 @@ document.getElementById("addtocart-btn").addEventListener("click", (e) => {
   const checkedProduct = document.querySelectorAll(
     '#display-product input[type="checkbox"]:checked'
   );
-
   document.getElementById("display-cart").innerHTML = "";
   totalPrice = 0;
 
@@ -53,8 +52,6 @@ document.getElementById("addtocart-btn").addEventListener("click", (e) => {
     addToCart(product);
     return totalPrice;
   });
-  console.log(totalPrice);
-
 });
 
 document.getElementById("calculate-btn").addEventListener("click", () => {
@@ -98,6 +95,9 @@ function displayProducts(product) {
 }
 
 function addToCart(product) {
+  if (totalPrice > 0) {
+    document.getElementById("calculate-btn").classList.remove("hidden");
+  }
   const displayCart = document.getElementById("display-cart");
   const card = document.createElement("div");
   card.className =
