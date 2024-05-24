@@ -4,9 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>36-meng-js</title>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <h2>Hello JavaScript</h2>
+    <h1 class="text-center">Shopping Cart</h1>
+    <section class="flex gap-8">
+        <!-- left div -->
+        <div class="w-8/12">
+            <h2>Add item for selection</h2>
+            <form id="form" class="flex">
+                <!-- Product -->
+                <div class="pr-2">
+                    <label for="productName" class="p-2">Product Name :</label>
+                    <input id="productInput" type="text" class="border-2 border-gray-300 rounded-lg">
+                </div>
+                <!-- Price -->
+                <div class="pr-2">
+                    <label for="price" class="p-2">Price :</label>
+                    <input id="priceInput" type="text" class="border-2 border-gray-300 rounded-lg">
+                </div>
+                <!-- Image -->
+                <div class="pr-2">
+                    <label for="imageURL" class="p-2">Image :</label>
+                    <input id="imageURLInput" type="text" class="border-2 border-gray-300 rounded-lg">
+                </div>
+                <button id="submit" type="submit" class="bg-slate-300 px-4 py-1 rounded-lg">Create Product</button>
+            </form>
+            <!-- Display Product -->
+            <div id="display-product" class="flex flex-wrap justify-center gap-4 overflow-y-scroll max-h-[550px] p-4">
+
+            </div>
+            <button id="addtocart-btn" class="bg-slate-300 px-4 py-1 rounded-lg">Add to Cart</button>
+        </div>
+        <!-- Right div -->
+        <div class="w-4/12">
+            <h2 id="totalPrice">You have to pay : </h2>
+            <button id="Calculate-btn" class="bg-slate-300 px-4 py-1 rounded-lg m-2">Calcultale Final Price</button>
+            <!-- Display Cart -->
+            <div id="display-cart" class="flex flex-col justify-between gap-4 overflow-y-scroll max-h-[550px] p-4">
+    
+            </div>
+        </div>
+    </section>
     <script src="script.js"></script>
   </body>
 </html>
