@@ -29,6 +29,7 @@ document.getElementById("form").addEventListener("submit", function (e) {
   };
   products.push(newProduct);
   displayProducts(newProduct);
+  errorMessage.textContent = "";
   document.getElementById("form").reset();
 });
 
@@ -41,22 +42,19 @@ document.getElementById("addtocart-btn").addEventListener("click", (e) => {
 
   document.getElementById("display-cart").innerHTML = "";
   totalPrice = 0;
-  //   console.log(checkedProduct);
+
   checkedProduct.forEach((checkedProduct) => {
     const productId = parseInt(checkedProduct.id);
     let product = products.find((product) => product.id === productId);
 
     let checkedPrice = parseInt(product.price);
     totalPrice += checkedPrice;
-    // console.log(checkedProduct.price);
-    // console.log(checkedPrice);
-    // console.log(product.productName);
-    // console.log(product);
+
     addToCart(product);
     return totalPrice;
   });
   console.log(totalPrice);
-  //   document.getElementById("totalPrice").innerText = `You have to pay : ${totalPrice}`;
+
 });
 
 document.getElementById("calculate-btn").addEventListener("click", () => {
